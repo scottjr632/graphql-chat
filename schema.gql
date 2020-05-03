@@ -1,0 +1,36 @@
+schema {
+    subscription: Subscription
+    mutation: Mutation
+    query: Query
+}
+
+type Query {
+    hello: String!
+    messages: [Message!]
+}
+
+type Subscription {
+    helloSaid(): HelloSaidEvent!
+    messageCreated(channelName: String!): Message!
+}
+
+type Mutation {
+    sayHello(msg: String!): HelloSaidEvent!
+    createMessage(content: String!, channelName: String!): Message!
+}
+
+type HelloSaidEvent {
+    id: String!
+    msg: String!
+}
+
+type Message {
+    id: String!
+    content: String!
+    channel: Channel!
+}
+
+type Channel {
+    id: String!
+    name: String!
+}

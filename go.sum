@@ -10,6 +10,9 @@ github.com/graph-gophers/graphql-transport-ws v0.0.0-20181018011518-374d1ed2bcc9
 github.com/graph-gophers/graphql-transport-ws v0.0.0-20181018011518-374d1ed2bcc9/go.mod h1:mA6VjyefgI7zd37tC3zopb51mW39gSfnEoWvtnxsqKQ=
 github.com/graph-gophers/graphql-transport-ws v0.0.0-20181129022607-40b8cf7c0060 h1:B2EIwB0lR336zU77c8r/b5clIE5UcjZicUi6GjXcjdw=
 github.com/graph-gophers/graphql-transport-ws v0.0.0-20181129022607-40b8cf7c0060/go.mod h1:mA6VjyefgI7zd37tC3zopb51mW39gSfnEoWvtnxsqKQ=
+github.com/graphql-go/graphql v0.7.9 h1:5Va/Rt4l5g3YjwDnid3vFfn43faaQBq7rMcIZ0VnV34=
+github.com/graphql-go/graphql v0.7.9/go.mod h1:k6yrAYQaSP59DC5UVxbgxESlmVyojThKdORUqGDGmrI=
+github.com/matiasanaya/go-graphql-subscription-example v0.0.0-20181129052408-fccf8252785c h1:FoDyunQv6abhRE2PmX6mdaenautyxRXG4jRz69H9juQ=
 github.com/opentracing/opentracing-go v1.0.2 h1:3jA2P6O1F9UOrWVpwrIo17pu01KWvNWg4X946/Y5Zwg=
 github.com/opentracing/opentracing-go v1.0.2/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
