@@ -72,8 +72,14 @@ func (r *Resolver) CreateMessage(args struct {
 }
 
 // Messages resolves for the messages query
-func (r *Resolver) Messages() *[]*Message {
-	return &messages
+func (r *Resolver) Messages(args struct{ ChannelName string }) *[]*Message {
+	var channelMessages []*Message
+	for _, message := range messages {
+		if message.channel.name == args.ChannelName {
+			channelMessages = append(channelMessages, message)
+		}
+	}
+	return &channelMessages
 }
 
 // ID is the id for the messages

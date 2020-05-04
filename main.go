@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"net/http"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/graph-gophers/graphql-transport-ws/graphqlws"
 	"github.com/scottjr632/graphq-sub-test/graphiql"
@@ -22,23 +21,24 @@ func init() {
 	}
 }
 
-func main() {
-	// graphiql handler
-	http.HandleFunc("/", http.HandlerFunc(graphiql.Serve(httpPort)))
+func ginHTTPAdapter(f func(http.ResponseWriter, *http.Request)) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		f(c.Writer, c.Request)
+	}
+}
 
-	// init graphQL schema
+func main() {
+	r := gin.Default()
+
+	r.GET("/", ginHTTPAdapter(http.HandlerFunc(graphiql.Serve(httpPort))))
+
 	s, err := schema.New()
 	if err != nil {
 		panic(err)
 	}
 
-	// graphQL handler
 	graphQLHandler := graphqlws.NewHandlerFunc(s, &relay.Handler{Schema: s})
-	http.HandleFunc("/graphql", middleware.LoggingHandler(graphQLHandler))
+	r.Any("/graphql", ginHTTPAdapter(middleware.CORS(middleware.LoggingHandler(graphQLHandler))))
 
-	log.Printf("Listening on port %s\n", httpPort)
-	// start HTTP server
-	if err := http.ListenAndServe(fmt.Sprintf(":%s", httpPort), nil); err != nil {
-		panic(err)
-	}
+	r.Run()
 }

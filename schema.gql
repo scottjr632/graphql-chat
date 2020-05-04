@@ -6,7 +6,9 @@ schema {
 
 type Query {
     hello: String!
-    messages: [Message!]
+    messages(channelName: String!): [Message!]
+    channels: [Channel!]
+    channel(name: String!): Channel!
 }
 
 type Subscription {
@@ -17,6 +19,7 @@ type Subscription {
 type Mutation {
     sayHello(msg: String!): HelloSaidEvent!
     createMessage(content: String!, channelName: String!): Message!
+    createChannel(name: String!): Channel!
 }
 
 type HelloSaidEvent {
