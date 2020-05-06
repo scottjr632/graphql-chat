@@ -1,43 +1,30 @@
-# GraphQL subscription example
-[![Build Status](https://travis-ci.org/matiasanaya/go-graphql-subscription-example.svg?branch=master)](https://travis-ci.org/matiasanaya/go-graphql-subscription-example)
+# GraphQL Golang example
 
 This application uses:
 
 * [github.com/graph-gophers/graphql-go](https://github.com/graph-gophers/graphql-go)
 * [github.com/graph-gophers/graphql-transport-ws](https://github.com/graph-gophers/graphql-transport-ws)
 
-## Pre-requisites
+## Getting started
 
-**Requires Go 1.11.x** or above, which support Go modules. Read more about them [here](https://github.com/golang/go/wiki/Modules).
-
-Remember to set ```GO111MODULE=on```
-
-## How to use
-
-Run the application:
+Run the server:
 
 ```
 go run main.go
 ```
 
-Navigate to [localhost:8080](http://localhost:8080) and use GraphiQL to subscribe using the following example:
+Navigate to [localhost:8080](http://localhost:8080) to use the explorer
+
+Start the client
 
 ```
-subscription onHelloSaid {
-  helloSaid {
-    id
-    msg
-  }
-}
+cd client
+
+yarn install
+```
+```bash
+yarn start
 ```
 
-On a separate tab run:
+Navigate to [localhost:3000](http://localhost:3000) to use the web client
 
-```
-mutation SayHello{
-  sayHello(msg: "Hello world!") {
-    id
-    msg
-  }
-}
-```

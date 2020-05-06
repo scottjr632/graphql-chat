@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/graph-gophers/graphql-transport-ws/graphqlws"
-	"github.com/scottjr632/graphq-sub-test/graphiql"
-	"github.com/scottjr632/graphq-sub-test/middleware"
-	"github.com/scottjr632/graphq-sub-test/schema"
+	"github.com/scottjr632/graphql-chat/graphiql"
+	"github.com/scottjr632/graphql-chat/middleware"
+	"github.com/scottjr632/graphql-chat/schema"
 )
 
 var httpPort = "8080"

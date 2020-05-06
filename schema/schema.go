@@ -4,12 +4,12 @@ import (
 	"io/ioutil"
 
 	graphql "github.com/graph-gophers/graphql-go"
-	"github.com/scottjr632/graphq-sub-test/schema/resolver"
+	"github.com/scottjr632/graphql-chat/schema/resolver"
 )
 
 const defaultQqlFileName = "schema.gql"
 
-func getQqlSchema(filePath string) (string, error) {
+func getGqlSchema(filePath string) (string, error) {
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return "", nil
@@ -18,7 +18,7 @@ func getQqlSchema(filePath string) (string, error) {
 }
 
 func mustGetQqlSchema(filePath string) string {
-	schema, err := getQqlSchema(filePath)
+	schema, err := getGqlSchema(filePath)
 	if err != nil {
 		panic(err)
 	}

@@ -7,11 +7,11 @@ var channelMu sync.Mutex
 var channels = []*Channel{
 	&Channel{
 		id:   randomID(),
-		name: "test",
+		name: "Memes",
 	},
 	&Channel{
 		id:   randomID(),
-		name: "Cool channels",
+		name: "Random",
 	},
 }
 

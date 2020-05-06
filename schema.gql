@@ -5,26 +5,18 @@ schema {
 }
 
 type Query {
-    hello: String!
     messages(channelName: String!): [Message!]
     channels: [Channel!]
     channel(name: String!): Channel!
 }
 
 type Subscription {
-    helloSaid(): HelloSaidEvent!
     messageCreated(channelName: String!): Message!
 }
 
 type Mutation {
-    sayHello(msg: String!): HelloSaidEvent!
     createMessage(content: String!, channelName: String!): Message!
     createChannel(name: String!): Channel!
-}
-
-type HelloSaidEvent {
-    id: String!
-    msg: String!
 }
 
 type Message {

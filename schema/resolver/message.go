@@ -8,9 +8,9 @@ import (
 var mutex sync.Mutex
 
 var messages = []*Message{
-	&Message{id: randomID(), content: "test", channel: &Channel{
+	&Message{id: randomID(), content: "Hello, world!", channel: &Channel{
 		id:   randomID(),
-		name: "test",
+		name: "Memes",
 	}},
 }
 
