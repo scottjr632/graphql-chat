@@ -21,6 +21,18 @@ type Channel struct {
 	name string
 }
 
+type ChannelJSON struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+func (c *Channel) toJSON() *ChannelJSON {
+	return &ChannelJSON{
+		ID:   c.ID(),
+		Name: c.Name(),
+	}
+}
+
 func (r *Resolver) CreateChannel(arg struct{ Name string }) *Channel {
 	newChannel := &Channel{id: randomID(), name: arg.Name}
 	mu.Lock()

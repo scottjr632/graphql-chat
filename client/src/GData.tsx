@@ -10,29 +10,38 @@ import Channels from './components/channels'
 import MessagesBox from './components/messages'
 import InputBox from './components/inputBox'
 import { Grid } from '@primer/components';
+import useListener from './common/useListener';
+
+const parseData = (msg: string) => JSON.parse(msg)
 
 const GData = () => {
   const [activeChannel, setActiveChannel] = useState('');
   const [messages, setMessages] = useState<Messages_messages[]>([]);
 
+  const messageSSE = useListener<Messages_messages>('message', 'http://localhost:8080/listen', parseData)
+
   const { loading, error, data, refetch } = useQuery<Messages, MessagesVariables>(MESSAGES, {
-    variables: { channelName: activeChannel }
+    variables: { channelName: activeChannel }, fetchPolicy: 'network-only'
   })
   const { data: createdMessage } = useSubscription<onMessageCreation>(MESSAGES_SUBSCRIPTION, {
     variables: { channelName: activeChannel }
   });
 
   useEffect(() => {
+    if (messageSSE) {
+      setMessages(prevMsgs => [...prevMsgs, { ...messageSSE, content: `${messageSSE.content} - From SSE`}])
+    }
+  }, [messageSSE])
+
+  useEffect(() => {
     if (!loading && !error && data?.messages) {
-      console.log({ data })
       setMessages(data.messages)
     }
   }, [data, error, loading])
 
   useEffect(() => {
-    console.log({ createdMessage })
     if (createdMessage?.messageCreated) {
-      setMessages(prevMessages => [...prevMessages, createdMessage.messageCreated])
+      setMessages(prevMessages => [...prevMessages, {...createdMessage.messageCreated, content: `${createdMessage.messageCreated.content} - From GraphQL websocket`}])
     }
   }, [createdMessage])
 

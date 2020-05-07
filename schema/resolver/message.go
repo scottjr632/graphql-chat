@@ -3,6 +3,8 @@ package resolver
 import (
 	"context"
 	"sync"
+
+	"github.com/scottjr632/graphql-chat/routes"
 )
 
 var mutex sync.Mutex
@@ -19,6 +21,20 @@ type Message struct {
 	id      string
 	content string
 	channel *Channel
+}
+
+func (m *Message) toJSON() *messageJSON {
+	return &messageJSON{
+		ID:      m.ID(),
+		Content: m.Content(),
+		Channel: m.Channel().toJSON(),
+	}
+}
+
+type messageJSON struct {
+	ID      string       `json:"id"`
+	Content string       `json:"content"`
+	Channel *ChannelJSON `json:"channel"`
 }
 
 func (r *Resolver) MessageCreated(ctx context.Context, arg struct{ ChannelName string }) <-chan *Message {
@@ -68,6 +84,8 @@ func (r *Resolver) CreateMessage(args struct {
 		eventType: "message",
 		event:     newMessage,
 	}
+
+	routes.GetSubscriptionService().Send(newMessage.toJSON())
 	return newMessage
 }
 
